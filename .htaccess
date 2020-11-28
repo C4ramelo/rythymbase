@@ -1,0 +1,6 @@
+RewriteEngine on
+
+RewriteRule ^login$ controllers/ListaUsuarios.php
+RewriteRule ^signup$ controllers/SignUp.php
+RewriteRule ^home$ controllers/ListaCanciones.php
+RewriteRule ^forgotpass$ controllers/ForgotPass.php
