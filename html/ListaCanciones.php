@@ -100,25 +100,33 @@
 		}
 
 		.underlay-photo {
-  -webkit-animation: hue-rotate 6s infinite;
-          animation: hue-rotate 6s infinite;
-  background: url("https://64.media.tumblr.com/a060b877e1213d91609de3621a0dc4de/tumblr_orrh59u98w1r57tabo1_1280.jpg");
-  background-size: cover;
-  z-index: -1;
-}
+			-webkit-animation: hue-rotate 6s infinite;
+			animation: hue-rotate 6s infinite;
+			background: url("https://64.media.tumblr.com/a060b877e1213d91609de3621a0dc4de/tumblr_orrh59u98w1r57tabo1_1280.jpg");
+			background-size: cover;
+			z-index: -1;
+		}
 
-.underlay-black {
-  background: rgba(0, 0, 0, 0.7);
-  z-index: -1;
-}
-
+		.underlay-black {
+			background: rgba(0, 0, 0, 0.7);
+			z-index: -1;
+		}
 	</style>
 </head>
 
 <body>
-<input type="search" name="song"  autofocus="true" required="true" placeholder="Busca tu canción" />
+<form action="" method="post">
 
-<button>Search</button>
+  <p>
+
+    Búsqueda de música: <input type="search" name="busquedamusica" placeholder="Canción, autor, instrumento">
+
+    <input type="submit" value="Buscar">
+
+  </p>
+
+</form>
+
 	<div class="container">
 
 		<div class="table">

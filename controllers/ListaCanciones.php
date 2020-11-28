@@ -9,15 +9,13 @@ require '../views/ResultBuscarCancion.php';
 $c = new Canciones; //paso numero 2
 
 if (count($_POST) > 0) {
+    if (!isset($_POST['busquedamusica'])) die("error validacion buscar cancion");
+    $cancionespecifica = $c->BuscarCancion($_POST['busquedamusica']);
 
-    if (!isset($_POST['song'])) die("error validacion buscar cancion");
-    $c = new Canciones;
-    $cancionespecifica = $c->BuscarCancion($_POST['song']);
-
-    if ($cancionesespecifica) {
-        $c = new ResultBuscarCancion();
-        $c->cancionespecifica = $cancionespecifica;
-        $c->render();
+    if ($cancionespecifica) {
+        $v = new ResultBuscarCancion();
+        $v->cancionespecifica = $cancionespecifica;
+        $v->render();
     } else {
         echo 'paso por aca';
     }
