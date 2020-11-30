@@ -37,7 +37,7 @@
 			display: flex;
 			justify-content: center;
 			align-items: center;
-			min-height: 100vh;
+			min-height: 60vh;
 		}
 
 		.table {
@@ -56,6 +56,9 @@
 			display: flex;
 			width: 100%;
 			padding: 18px 0;
+			text-align: center;
+			vertical-align: middle;
+			
 		}
 
 		.table-row:nth-of-type(odd) {
@@ -99,10 +102,19 @@
 			content: '(asc)';
 		}
 
-		.underlay-photo {
+
+[class*=underlay] {
+  left: 0;
+  min-height: 100%;
+  min-width: 100%;
+  position: fixed;
+  top: 0;
+}
+
+.underlay-photo {
   -webkit-animation: hue-rotate 6s infinite;
           animation: hue-rotate 6s infinite;
-  background: url("https://64.media.tumblr.com/a060b877e1213d91609de3621a0dc4de/tumblr_orrh59u98w1r57tabo1_1280.jpg");
+  background: url("https://64.media.tumblr.com/d94956ecde756e23422cf7dfd1649392/f9c3153b88211c62-56/s2048x3072/921a93995af7eac2b24f3ff4568f1fa0de053f58.jpg");
   background-size: cover;
   z-index: -1;
 }
@@ -111,7 +123,6 @@
   background: rgba(0, 0, 0, 0.7);
   z-index: -1;
 }
-
 	</style>
 </head>
 
@@ -121,15 +132,21 @@
 
 		<div class="table">
 			<div class="table-header">
-				<div class="header__item"><a id="name" class="filter__link" href="#">Resultados de la búsqueda</a></div>
+				<div class="header__item"><a id="name" class="filter__link" href="#">Resultados de tu búsqueda</a></div>
 
 			</div>
 			<div class="table-content">
 				<div class="table-row">
-					<?php foreach ($this->cancionespecifica as $c) { ?>
-						<!-- variable que viene del controlador y recibe views -->
-						<?= $c['nombre'] ?> <br />
-					<?php } ?>
+					<table>
+					<?php foreach ($this->cancionespecifica as $c) {
+								echo "<tr>";
+								echo "<td>" . $c['cancion'] . "</td>";
+								echo "<td><a href='files/" . $c['ubicacion'] . "'> Abrir</a></td>";
+								echo "</tr>";
+							?>
+							<?php
+							}
+							?>
 					<div class="table-data"></div>
 					<div class="underlay-photo"></div>
 

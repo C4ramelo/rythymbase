@@ -15,10 +15,24 @@
 			box-sizing: border-box;
 		}
 
-		body {
-			padding: 24px;
+		p {
+
+			/*padding: 10px; */
 			font-family: 'Source Sans Pro', sans-serif;
 			margin: 0;
+			color: white;
+			margin-right: auto;
+			margin-left: auto;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			min-height: 5vh; 
+
+
+		}
+
+		body {
+			font-family: 'Source Sans Pro', sans-serif;
 		}
 
 		h1,
@@ -37,7 +51,7 @@
 			display: flex;
 			justify-content: center;
 			align-items: center;
-			min-height: 100vh;
+			min-height: 5vh;
 		}
 
 		.table {
@@ -50,12 +64,13 @@
 			width: 100%;
 			background: #000;
 			padding: 18px 0;
+			
 		}
 
 		.table-row {
 			display: flex;
 			width: 100%;
-			padding: 18px 0;
+			/*padding: 18px 0;*/
 		}
 
 		.table-row:nth-of-type(odd) {
@@ -99,10 +114,17 @@
 			content: '(asc)';
 		}
 
+
+		[class*=underlay] {
+			left: 0;
+			min-height: 100%;
+			min-width: 100%;
+			position: fixed;
+			top: 0;
+		}
+
 		.underlay-photo {
-			-webkit-animation: hue-rotate 6s infinite;
-			animation: hue-rotate 6s infinite;
-			background: url("https://64.media.tumblr.com/a060b877e1213d91609de3621a0dc4de/tumblr_orrh59u98w1r57tabo1_1280.jpg");
+			background: url("https://64.media.tumblr.com/d94956ecde756e23422cf7dfd1649392/f9c3153b88211c62-56/s2048x3072/921a93995af7eac2b24f3ff4568f1fa0de053f58.jpg");
 			background-size: cover;
 			z-index: -1;
 		}
@@ -115,18 +137,28 @@
 </head>
 
 <body>
-<form action="" method="post">
+	<form action="" method="post">
 
-  <p>
+		<p>
 
-    Búsqueda de música: <input type="search" name="busquedamusica" placeholder="Canción, autor, instrumento">
+			Motor de búsqueda de música: 
+			<input type="search" class="p" name="busquedamusica" placeholder="Canción, autor, instrumento" required="true">
 
-    <input type="submit" value="Buscar">
+			<input type="submit" value="Buscar">
 
-  </p>
+		</p>
 
-</form>
+	</form>
+	<form action="" method="post" enctype="multipart/form-data">
+		<p> Añade tus tablaturas aquí!
+			<input name="nombrecancion" required="true" placeholder="Nombre de la Cancion" />
+			<input name="nombreartista" required="true" placeholder="Nombre del Artista" />
 
+			<input type="file" name="file" value="">
+			<input type="submit" name="submit" value="Subir"><br>
+		</p>
+
+	</form>
 	<div class="container">
 
 		<div class="table">
@@ -136,10 +168,22 @@
 			</div>
 			<div class="table-content">
 				<div class="table-row">
-					<?php foreach ($this->canciones as $c) { ?>
-						<!-- variable que viene del controlador y recibe views -->
-						<?= $c['nombre'] ?> <br />
-					<?php } ?>
+					<div class="table-content">
+						<table id="tabla-php">
+							<?php foreach ($this->canciones as $c) {
+								echo "<tr>";
+								echo "<td>" . $c['nombre'] . "</td>";
+								echo "<td><a href='files/" . $c['ubicacion'] . "'> Abrir</a></td>";
+								echo "</tr>";
+							?>
+								<tr class="filler"></tr>
+							<?php
+							}
+							?>
+						</table>
+					</div>
+
+
 					<div class="table-data"></div>
 					<div class="underlay-photo"></div>
 
@@ -148,6 +192,7 @@
 			</div>
 		</div>
 	</div>
+
 
 
 </body>
