@@ -18,8 +18,8 @@ class Canciones extends Model
     {
 
 
-        if (strlen($nombrecancion) < 1) die("error2"); #si las validaciones desde js están hechas, representa un problema de seguridad. Analizo el dato
-        if (strlen($nombrecancion) > 50) die("error3");
+        if (strlen($nombrecancion) < 1) throw new ValidacionException('error1 Busqueda Cancion');//die("Error 1 Busqueda Cancion"); #si las validaciones desde js están hechas, representa un problema de seguridad. Analizo el dato
+        if (strlen($nombrecancion) > 50) throw new ValidacionException('error2 Busqueda Cancion');//die("Error 2 Busqueda Cancion");
         $nombrecancion = substr($nombrecancion, 0, 50);
 
         $nombrecancion = $this->db->escapeWildcards($nombrecancion);
@@ -35,27 +35,28 @@ class Canciones extends Model
 
     public function SubirTablatura($nombrecancion, $nombreartista)
     {
-        if (strlen($nombrecancion) < 1) die("error2"); #si las validaciones desde js están hechas, representa un problema de seguridad. Analizo el dato
-        if (strlen($nombrecancion) > 50) die("error3");
+        if (strlen($nombrecancion) < 1) throw new ValidacionException('error1 Subir Tablatura');//die("Error 1 Subir Tablatura"); #si las validaciones desde js están hechas, representa un problema de seguridad. Analizo el dato
+        if (strlen($nombrecancion) > 50) throw new ValidacionException('error2 Subir Tablatura');//die("Error 2 Subir Tablatura");
         $nombrecancion = substr($nombrecancion, 0, 50);
 
 
         $nombrecancion = $this->db->escapeWildcards($nombrecancion);
         //$nombrecancion = str_replace(' ', '', $nombrecancion);
+        //$this->db->escape($nombrecancion); no sirve
 
-        if (strlen($nombreartista) < 1) die("error2"); #si las validaciones desde js están hechas, representa un problema de seguridad. Analizo el dato
-        if (strlen($nombreartista) > 50) die("error3");
+        if (strlen($nombreartista) < 1) throw new ValidacionException('error2 Strlen Subir Tablatura');//die("Error 2 strlen Subir Tablatura"); #si las validaciones desde js están hechas, representa un problema de seguridad. Analizo el dato
+        if (strlen($nombreartista) > 50) throw new ValidacionException('error 3 Subir Tablatura');//die("error3");
         $nombreartista = substr($nombreartista, 0, 50);
-
+        
 
         $nombreartista = $this->db->escapeWildcards($nombreartista);
         //$nombreartista = str_replace(' ', '', $nombreartista);
+        //$this->db->escape($nombreartista); no sirve
 
         $tmpFile = $_FILES["file"]["tmp_name"];
         move_uploaded_file($tmpFile, '../files/' . $nombrecancion . $nombreartista . '.pdf');
 
         $pathfile = ($nombrecancion . $nombreartista . '.pdf');
-        var_dump($pathfile);
 
         $artistaaux = new Artistas;
 
@@ -66,9 +67,11 @@ class Canciones extends Model
 
             $this->db->query("INSERT INTO canciones (nombre, artista_id, ubicacion) 
              VALUES (('$nombrecancion'),(SELECT artista_id FROM artistas WHERE nombre LIKE ('$nombreartista')), ('$pathfile'))");
+        } else {
+            $this->db->query("INSERT INTO canciones (nombre, artista_id, ubicacion)
+            VALUES (('$nombrecancion'),(SELECT artista_id FROM artistas WHERE nombre LIKE ('$nombreartista')), ('$pathfile'))");
+
         }
-        $this->db->query("INSERT INTO canciones
-                        (nombre, ubicacion)  VALUES ('$nombrecancion') ");
 
 
 
@@ -77,4 +80,7 @@ class Canciones extends Model
         /* $this->db->query("INSERT INTO canciones /*verificar que funcione 
                         (ubicacion)  VALUES ('../files/$nombrecancion.$nombreartista') "); * probar esta query para insertarla */
     }
+}
+class ValidacionException extends Exception{
+
 }

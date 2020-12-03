@@ -20,7 +20,7 @@ if (count($_POST) > 0) {
             $v->cancionespecifica = $cancionespecifica;
             $v->render();
         } else {
-            echo 'paso por aca'; //que hago si no ingresó nada en el input de busqueda??
+            header("Location: home");
         }
     } if (isset($_POST['submit'])) {
         $a = new Artistas;

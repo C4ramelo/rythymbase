@@ -6,15 +6,15 @@ class Usuarios extends Model
     public function Validar($email, $password)
     {
 
-        if (strlen($email) < 1) die("error2"); #si las validaciones desde js están hechas, representa un problema de seguridad. Analizo el dato
-        if (strlen($password) > 50) die("error3");
+        if (strlen($email) < 1) throw new ValidacionException('error2 email validar');//die("error2"); #si las validaciones desde js están hechas, representa un problema de seguridad. Analizo el dato
+        if (strlen($password) > 50) throw new ValidacionException('error3 password validar');//die("error3");
 
 
         $email = substr($email, 0, 50);
         $email = $this->db->escapeWildcards($email);
 
-        if (strlen($password) < 1) die("error2"); #si las validaciones desde js están hechas, representa un problema de seguridad. Analizo el dato
-        if (strlen($password) > 50) die("error3");
+        if (strlen($password) < 1) throw new ValidacionException('error2 password validar');//die("error2"); #si las validaciones desde js están hechas, representa un problema de seguridad. Analizo el dato
+        if (strlen($password) > 50) die("error4 password validar");
         $passwd = substr($password, 0, 50);
 
         $passwd = $this->db->escapeWildcards($passwd);
@@ -45,14 +45,14 @@ class Usuarios extends Model
 
     public function SignUp($email, $password) {
 
-        if (strlen($email) < 1) die("error2"); #si las validaciones desde js están hechas, representa un problema de seguridad. Analizo el dato
-        if (strlen($password) > 50) die("error3");
+        if (strlen($email) < 1) throw new ValidacionException('error2 email signup');//die("error2"); #si las validaciones desde js están hechas, representa un problema de seguridad. Analizo el dato
+        if (strlen($password) > 50) new ValidacionException('error3 password signup');//die("error3");
         $email = substr($email, 0, 50);
 
         $email = $this->db->escapeWildcards($email);
 
-        if (strlen($password) < 1) die("error2"); #si las validaciones desde js están hechas, representa un problema de seguridad. Analizo el dato
-        if (strlen($password) > 50) die("error3");
+        if (strlen($password) < 1) throw new ValidacionException('error2 password signup');//die("error2"); #si las validaciones desde js están hechas, representa un problema de seguridad. Analizo el dato
+        if (strlen($password) > 50) throw new ValidacionException('error3 email signup');//die("error3");
         $passwd = substr($password, 0, 50);
 
         $passwd = $this->db->escapeWildcards($passwd);
@@ -81,14 +81,14 @@ class Usuarios extends Model
 
     public function ForgotPass($email, $password) {
 
-        if (strlen($email) < 1) die("error2"); #si las validaciones desde js están hechas, representa un problema de seguridad. Analizo el dato
-        if (strlen($password) > 50) die("error3");
+        if (strlen($email) < 1) throw new ValidacionException('error2 email forgotpass');//die("error2"); #si las validaciones desde js están hechas, representa un problema de seguridad. Analizo el dato
+        if (strlen($password) > 50) throw new ValidacionException('error2 password forgotpass');//die("error3");
         $email = substr($email, 0, 50);
 
         $email = $this->db->escapeWildcards($email);
 
-        if (strlen($password) < 1) die("error2"); #si las validaciones desde js están hechas, representa un problema de seguridad. Analizo el dato
-        if (strlen($password) > 50) die("error3");
+        if (strlen($password) < 1) throw new ValidacionException('error3 password forgotpass');//die("error2"); #si las validaciones desde js están hechas, representa un problema de seguridad. Analizo el dato
+        if (strlen($password) > 50) throw new ValidacionException('error4 password forgotpass');//die("error3");
         $passwd = substr($password, 0, 50);
 
         $passwd = $this->db->escapeWildcards($passwd);
@@ -116,3 +116,6 @@ class Usuarios extends Model
     }
 }
 
+class ValidacionException extends Exception{
+
+}

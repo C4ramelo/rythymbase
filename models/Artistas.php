@@ -9,8 +9,8 @@ class Artistas extends Model
     public function ExisteArtista($nombreartista)
     {
 
-        if (strlen($nombreartista) < 1) die("error artista1"); #si las validaciones desde js están hechas, representa un problema de seguridad. Analizo el dato
-        if (strlen($nombreartista) > 50) die("error artista2");
+        if (strlen($nombreartista) < 1) throw new ValidacionException('error artista1');//die("error artista1"); #si las validaciones desde js están hechas, representa un problema de seguridad. Analizo el dato
+        if (strlen($nombreartista) > 50) throw new ValidacionException('error artista2');//die("error artista2");
 
 
         $nombreartista = substr($nombreartista, 0, 50);
@@ -25,4 +25,8 @@ class Artistas extends Model
             return false;
         }
     }
+}
+
+class ValidacionException extends Exception{
+
 }

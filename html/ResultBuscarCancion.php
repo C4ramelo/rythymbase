@@ -1,130 +1,140 @@
-<!-- html/ListadoCanciones.php EL HTML tiene que tener el mismo nombre que la Clase de la Vista-->
-
 <!DOCTYPE html>
 <html>
 
 <head>
-	<title>Listado de Canciones</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<style>
 		@import url(https://fonts.googleapis.com/css?family=Open+Sans:100,300,400,700);
 		@import url(//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css);
 
-		*,
-		*:before,
-		*:after {
-			box-sizing: border-box;
-		}
-
 		body {
-			padding: 24px;
-			font-family: 'Source Sans Pro', sans-serif;
+			font-family: 'Open Sans';
 			margin: 0;
+			background: url("https://64.media.tumblr.com/d94956ecde756e23422cf7dfd1649392/f9c3153b88211c62-56/s2048x3072/921a93995af7eac2b24f3ff4568f1fa0de053f58.jpg");
+			background-size: cover;
+			z-index: -1;
 		}
 
-		h1,
-		h2,
-		h3,
-		h4,
-		h5,
-		h6 {
-			margin: 0;
+		.topnav {
+			overflow: hidden;
+			background-color: #e9e9e9;
+			font-family: 'Open Sans';
 		}
 
-		.container {
-			max-width: 1000px;
-			margin-right: auto;
-			margin-left: auto;
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			min-height: 60vh;
-		}
-
-		.table {
-			width: 100%;
-			border: 1px solid #eee;
-		}
-
-		.table-header {
-			display: flex;
-			width: 100%;
-			background: #000;
-			padding: 18px 0;
-		}
-
-		.table-row {
-			display: flex;
-			width: 100%;
-			padding: 18px 0;
+		.topnav a {
+			float: left;
+			display: block;
+			color: black;
 			text-align: center;
-			vertical-align: middle;
-			
-		}
-
-		.table-row:nth-of-type(odd) {
-			background: #eee;
-		}
-
-		.table-data,
-		.header__item {
-			flex: 1 1 20%;
-			text-align: center;
-		}
-
-		.header__item {
-			text-transform: uppercase;
-		}
-
-		.filter__link {
-			color: white;
+			padding: 14px 16px;
 			text-decoration: none;
-			position: relative;
-			display: inline-block;
-			padding-left: 24px;
-			padding-right: 24px;
+			font-size: 17px;
 		}
 
-		.filter__link::after {
-			content: '';
-			position: absolute;
-			right: -18px;
+		.topnav a:hover {
+			background-color: #ddd;
+			color: black;
+			float: left;
+		}
+		
+
+		.topnav a.active {
+			background-color: #000000;
 			color: white;
-			font-size: 12px;
-			top: 50%;
-			transform: translateY(-50%);
+			float: right;
 		}
 
-		.filter__link.desc::after {
-			content: '(desc)';
+		.topnav .search-container {
+			float: right;
 		}
 
-		.filter__link.asc::after {
-			content: '(asc)';
+		.topnav input[type=text] {
+			padding: 6px;
+			margin-top: 8px;
+			font-size: 17px;
+			border: none;
 		}
 
+		.topnav .search-container button {
+			float: right;
+			padding: 6px 10px;
+			margin-top: 8px;
+			margin-right: 16px;
+			background: #ddd;
+			font-size: 17px;
+			border: none;
+			cursor: pointer;
+		}
 
-[class*=underlay] {
-  left: 0;
-  min-height: 100%;
-  min-width: 100%;
-  position: fixed;
-  top: 0;
-}
+		.topnav .search-container button:hover {
+			background: #ccc;
+		}
 
-.underlay-photo {
-  -webkit-animation: hue-rotate 6s infinite;
-          animation: hue-rotate 6s infinite;
-  background: url("https://64.media.tumblr.com/d94956ecde756e23422cf7dfd1649392/f9c3153b88211c62-56/s2048x3072/921a93995af7eac2b24f3ff4568f1fa0de053f58.jpg");
-  background-size: cover;
-  z-index: -1;
-}
+		@media screen and (max-width: 600px) {
+			.topnav .search-container {
+				float: none;
+			}
 
-.underlay-black {
-  background: rgba(0, 0, 0, 0.7);
-  z-index: -1;
-}
+			.topnav a,
+			.topnav input[type=text],
+			.topnav .search-container button {
+				float: none;
+				display: block;
+				text-align: left;
+				width: 100%;
+				margin: 0;
+				padding: 14px;
+			}
+
+			.topnav input[type=text] {
+				border: 1px solid #ccc;
+			}
+		}
+
+		table,
+		th,
+		td {
+
+			width: 80%;
+			margin: auto;
+			border: 0.5px solid white;
+			border-collapse: collapse;
+			text-align: center;
+			font-size: 25px;
+			table-layout: fixed;
+			background: black;
+			opacity: 0.5;
+			color: white;
+			margin-top: 100px;
+			font-family: 'Source Sans Pro', sans-serif;
+
+		}
+
+		th,
+		td {
+
+			padding: 20px;
+			opacity: 0.9;
+		}
+
+		p {
+			float: center;
+			display: block;
+			color: white;
+			text-align: center;
+			padding: 14px 16px;
+			text-decoration: none;
+			font-size: 20px;
+			font-family: 'Source Sans Pro', sans-serif;
+
+		}
+
+		h1 {
+			color:white;
+		}
 	</style>
 </head>
+
 
 <body>
 
@@ -132,7 +142,7 @@
 
 		<div class="table">
 			<div class="table-header">
-				<div class="header__item"><a id="name" class="filter__link" href="#">Resultados de tu búsqueda</a></div>
+				<h1>Resultados de tu búsqueda</h1>
 
 			</div>
 			<div class="table-content">
